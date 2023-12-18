@@ -10,7 +10,6 @@ html, body{
 *:focus {
     outline: none;
    }
-
 @layer components{
     .qwik-sidebar-item-component {
         @apply opacity-70 font-medium ease-in duration-75 cursor-pointer flex gap-5 flex-wrap align-middle;

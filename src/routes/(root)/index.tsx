@@ -1,11 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 //import { HeadInfo } from "~/components/head-info/head-info";
+import BooksWrapper from "~/components/books-wrapper/books-wrapper";
 
 export default component$(() => {
   return (
-    <div class="">
-      
+    <div class="flex-1">
+        <BooksWrapper />
     </div>
   );
 });

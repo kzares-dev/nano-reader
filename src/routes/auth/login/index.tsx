@@ -1,57 +1,37 @@
 import { $, component$, useStore } from "@builder.io/qwik";
-//import { signIn } from "../auth";
-import { Button } from "~/components/ui/button";
-import { Link } from "@builder.io/qwik-city";
-//import { signIn } from "~/auth/auth";
-
 
 export default component$(() => {
-  const store = useStore<{ email: string, password: string }>({
+
+  const store = useStore({
     email: "",
     password: "",
   })
 
-
   const signIn = $(() => {
-
+      
   })
 
-  return (
-    <div
-      class={"h-full w-full flex justify-center content-center items-center"}
-    >
-      <form preventdefault:submit onsubmit$={signIn}  >
-        <div class={"flex flex-col gap-3 p-3"}>
+  return (  
 
-          <input
-            value={store.email}
-            onInput$={(ev: any) => (store.email = ev?.target?.value)}
-            class="qwik-input-src"
-            type="text"
-            placeholder="Email...."
-          />
+    <div class="h-full w-full justify-center items-center">
+      <form onSubmit$={signIn} preventdefault:submit >
+        <input
+          value={store.email}
+          onInput$={(ev: any) => (store.email = ev.target.value)}
+          class="quik-input-src"
+          type="text"
+          placeholder="Email..."
+        />
 
-          <input
-            value={store.password}
-            onInput$={(ev: any) => (store.password = ev?.target?.value)}
-            class="qwik-input-src"
-            type="password"
-            placeholder="Password...."
-          />
-
-          <div class="flex gap-2">
-            <Button 
-              label="Log in"
-              color="primary"
-            />
-
-            <Link>
-              <Button label="Cancel" color="default" />
-            </Link>
-          </div>
-
-        </div>
+        <input
+          value={store.password}
+          onInput$={(ev: any) => (store.password = ev.target.value)}
+          class="quik-input-src"
+          type="text"
+          placeholder="Password..."
+        />
       </form>
     </div>
-  );
-});
+  )
+
+})

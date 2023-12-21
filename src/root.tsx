@@ -2,6 +2,7 @@ import { component$, useStyles$ } from '@builder.io/qwik';
 import { QwikCityProvider, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
 
 import globalStyles from '~/assets/styles/global.css?inline';
+import { RouterHead } from './components/router-head/router-head';
 
 export default component$(() => {
   /**
@@ -17,6 +18,7 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
+        <RouterHead/>
       </head>
       <body lang="en" class="overflow-hidden">
         <RouterOutlet />

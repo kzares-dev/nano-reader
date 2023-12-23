@@ -5,6 +5,7 @@ import logo from "~/assets/images/logo.svg"
 import list from "~/assets/images/list.png"
 import layout from "~/assets/images/layout.png";
 import { LayoutContext } from "~/context/layout-context";
+import { Link } from "@builder.io/qwik-city";
 
 
 
@@ -34,10 +35,12 @@ export default component$(() => {
                 <div class="flex flex-row gap-10 flex-1 justify-between pl-10" >
                     <div class="relative">
                         <div class="flex items-center justify-center gap-3  absolute ">
-                            <Button
-                                color="primary"
-                                label="Add Book"
-                            />
+                            <Link href='/upload'>
+                                <Button
+                                    color="primary"
+                                    label="Add Book"
+                                />
+                            </Link>
                             <Button
                                 color="default"
                                 label="Add Folder"
@@ -55,11 +58,11 @@ export default component$(() => {
 
                         <div class="flex px-3 flex-row gap-2 mt-1 ">
 
-                            <div onClick$={() => setState(false)} class={`w-10 h-10 p-[10px] rounded-full border flex items-center justify-center ${!state.type && "bg-gray-100" }`}>
+                            <div onClick$={() => setState(false)} class={`w-10 h-10 p-[10px] rounded-full border flex items-center justify-center ${!state.type && "bg-gray-100"}`}>
                                 <img src={list} class="w-full h-full " alt="" />
                             </div>
 
-                            <div onClick$={() => setState(true)} class={`w-10 h-10 p-[10px] rounded-full border flex items-center justify-center ${state.type && "bg-gray-100" }`}>
+                            <div onClick$={() => setState(true)} class={`w-10 h-10 p-[10px] rounded-full border flex items-center justify-center ${state.type && "bg-gray-100"}`}>
                                 <img src={layout} class="w-full h-full " alt="" />
                             </div>
                         </div>

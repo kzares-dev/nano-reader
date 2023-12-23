@@ -42,6 +42,7 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "dependencies": {
+    "@bytescale/sdk": "^3.21.3",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",

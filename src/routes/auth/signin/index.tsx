@@ -50,7 +50,7 @@ export default component$(() => {
 
 
 
-        <Link href="/auth/signup" class="underline text-[15px] font-nano text-gray-500 cursor-pointer " > Have no account? </Link>
+        <Link href="/auth/signup" class="underline text-[15px] font-nano text-gray-500 cursor-pointer mt-5" > Have no account? </Link>
 
 
 

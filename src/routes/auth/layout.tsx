@@ -13,8 +13,8 @@ export const onRequest: RequestHandler = async ({ cookie, redirect, url }) => {
   jwt.verify(token, 'R2h8sPqJ4T9g3nF1', function (err) {
 
     // check if token is valid
-    if (!err) {
-      cookie.delete('jwt_access_token')
+    if (err) {
+       return cookie.delete('jwt_access_token')
     }
     throw redirect(
       308,

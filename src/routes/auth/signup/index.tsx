@@ -51,7 +51,7 @@ export default component$(() => {
 
 
 
-        <Link href="/auth/signin" class="underline text-[15px] font-nano text-gray-500 cursor-pointer " > You have an account? </Link>
+        <Link href="/auth/signin" class="underline text-[15px] font-nano text-gray-500 cursor-pointer mt-5" > You have an account? </Link>
 
 
 

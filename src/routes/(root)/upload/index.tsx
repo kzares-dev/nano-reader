@@ -1,9 +1,26 @@
-import { component$ } from "@builder.io/qwik";
+import { $, component$, useStore } from "@builder.io/qwik";
 import logo from '~/assets/images/logo.svg'
+import { FileType, file } from "~/lib";
 
 
 export default component$(() => {
 
+    //create a store state to save the user collected data 
+    const store = useStore<FileType>({
+        title: "",
+        author: "",
+        fileUrl: "http://fileurl.com",
+        imageUrl: "http://fileimageurl.com",
+        userId: "658493e32093afda4b25cb20",
+    })
+
+
+    const uploadFile = $(() => {
+
+        file.uploadFile(store)
+            .then(res => console.log(res))
+            .catch(error => console.log(error))
+    })
     return <section class='flex flex-row w-full'>
 
         <div class="px-5 pt-[5vw] rounded-md border shadow md:min-w-[450px] bg-white h-full flex flex-col items-center gap-10 pb-10">
@@ -13,15 +30,20 @@ export default component$(() => {
                 <h1 class='text-[30px] font-bold -ml-8 '>Upload File</h1>
             </div>
 
-            <form preventdefault:submit class="w-full flex gap-5 flex-col">
+            <form onSubmit$={uploadFile} preventdefault:submit class="w-full flex gap-5 flex-col">
                 <input
-                    type="email"
+                    value={store.title}
+                    onInput$={(ev: any) => (store.title = ev.target.value.toString())}
+
+                    type="text"
                     class="w-full py-3 pl-4 rounded-md border"
                     placeholder="Set a title..."
                     required />
 
                 <input
-                    type="password"
+                    value={store.author}
+                    onInput$={(ev: any) => (store.author = ev.target.value.toString())}
+                    type="text"
                     class="w-full py-3 pl-4 rounded-md border"
                     placeholder="Author..."
                     required />

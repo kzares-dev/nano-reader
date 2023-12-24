@@ -15,12 +15,6 @@ export default component$(() => {
     user.signin(store)
       .then(res => {
         Cookie.set("jwt_access_token", res.data.access_token );
-
-        // saving the user data in local storage 
-        window.localStorage.setItem('session', JSON.stringify({
-            id: res.data.id,
-            email: res.data.email
-        }))
         // ! navigation not working should be implemented here
       
       })

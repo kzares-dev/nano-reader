@@ -7,8 +7,6 @@ import layout from "~/assets/images/layout.png";
 import { LayoutContext } from "~/context/layout-context";
 import { Link } from "@builder.io/qwik-city";
 
-
-
 export default component$(() => {
 
     const state = useContext(LayoutContext);
@@ -22,7 +20,6 @@ export default component$(() => {
     return (
         <div class=" shadow-sm border bg-white">
             <div class="px-[20px] py-5 pt-8 flex items-center flex-row gap-5 ">
-
 
                 <div class="flex items-center justify-center gap-6 cursor-pointer w-[189px] ">
                     <img src={logo} alt="" width={60} height={60} />

@@ -11,13 +11,17 @@ export default component$(() => {
     password: "",
   })
 
-  const signIn = $(() => {
+  const signup = $(() => {
     user.signup(store)
       .then(res => {
-        alert(res.data.access_token)
         Cookie.set("jwt_access_token", res.data.access_token, { expires: 7, path: '/' });
+        // saving the user data in local storage 
+        localStorage.setItem('session', JSON.stringify({
+          id: res.data.id,
+          email: res.data.email
+        }))
         // ! navigation not working should be implemented here
-        
+
 
       })
       .catch(err => alert(err))
@@ -32,7 +36,7 @@ export default component$(() => {
         <h1 class='text-[30px] font-bold -ml-8 '>Sign-Up {'>w>'}</h1>
       </div>
 
-      <form onSubmit$={signIn} preventdefault:submit class="w-full flex gap-5 flex-col">
+      <form onSubmit$={signup} preventdefault:submit class="w-full flex gap-5 flex-col">
         <input
           value={store.email}
           onInput$={(ev: any) => (store.email = ev.target.value.toString())}

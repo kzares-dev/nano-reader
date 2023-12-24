@@ -1,9 +1,12 @@
-import { $, component$, useStore } from "@builder.io/qwik";
+import { $, component$, useContext, useStore } from "@builder.io/qwik";
 import logo from '~/assets/images/logo.svg'
+import { SessionContext } from "~/context/session.context";
 import { FileType, file } from "~/lib";
 
 
 export default component$(() => {
+
+    const sessionContext = useContext(SessionContext);
 
     //create a store state to save the user collected data 
     const store = useStore<FileType>({
@@ -11,7 +14,7 @@ export default component$(() => {
         author: "",
         fileUrl: "http://fileurl.com",
         imageUrl: "http://fileimageurl.com",
-        userId: "658493e32093afda4b25cb20",
+        userId: sessionContext.id,
     })
 
 

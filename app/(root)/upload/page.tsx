@@ -1,23 +1,40 @@
 "use client"
 import Image from 'next/image'
 import logo from '@/public/logo.svg'
+import { useState } from 'react'
+import { FileType, file } from '@/lib'
+import { useRecoilState } from 'recoil'
+import { sessionAtom } from '@/atoms'
 
 const Upload = () => {
 
-    const uploadFile = (ev: any) => {
+    const [session, setSession] =  useRecoilState(sessionAtom);
 
+    const [fileData, setFileData] = useState<FileType>({
+        title: "title", // TODO: Mock data should be romove later
+        author: "author",
+        fileUrl: "http://fileurl.com",
+        imageUrl: "http://fileimageurl.com",
+        userId: session.id,
+    })
 
+    const uploadFile = (e: any) => {
+
+        e.preventDefault()
+        file.uploadFile(fileData)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
     return <section className='flex flex-row w-full'>
 
-        <div className="px-5 pt-[5vw] rounded-md border shadow md:min-w-[450px] bg-white h-full flex flex-col items-center gap-10 pb-10">
+        <div className="px-5 pt-[5vw] rounded-md border rounded-tl-none rounded-bl-none shadow md:min-w-[450px] bg-white h-full flex flex-col items-center gap-10 pb-10">
 
             <div className="flex items-center flex-row">
                 <Image src={logo} alt="" width={100} height={100} />
                 <h1 className='text-[30px] font-bold -ml-8 '>Upload File</h1>
             </div>
 
-            <form onSubmit={ (ev: any) => uploadFile(ev)}  className="w-full flex gap-5 flex-col">
+            <form onSubmit={(e: any) => uploadFile(e)} className="w-full flex gap-5 flex-col">
                 <input
 
                     type="text"
@@ -26,7 +43,7 @@ const Upload = () => {
                     required />
 
                 <input
-                   
+
                     type="text"
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Author..."

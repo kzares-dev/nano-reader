@@ -5,8 +5,9 @@ import { useState } from "react";
 import banner from "@/public/banner.jpg"
 import star from "@/public/star.png"
 import Image from "next/image";
+import { FileType } from "@/lib";
 
-const File = () => {
+const File = ({ file }: { file: FileType }) => {
 
     //const [listLayout, setListLayout] = useState(false);
     // TODO: Implement the block file view
@@ -19,12 +20,12 @@ const File = () => {
                     <Image src={banner} className="flex-1 w-full h-full rounded-md shadow border" alt="" />
                 </div>
 
-                <h1 className="text-[15px] font-semibold font-sans text-gray-600 ">Data Structures and algorithms in JavaScript</h1>
+                <h1 className="text-[15px] font-semibold font-sans text-gray-600 "> {file.title} </h1>
             </div>
 
             <div className="flex flex-col pl-5 border-l">
                 <h1>Author</h1>
-                <h2 className="text-[15px] font-thin font-sans text-gray-600 " >Leonar McOneil</h2>
+                <h2 className="text-[15px] font-thin font-sans text-gray-600 " > {file.author} </h2>
 
             </div >
 

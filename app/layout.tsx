@@ -13,7 +13,9 @@ export default function AppLayout({
 }) {
   return (
     <html lang="en">
-      <body className='w-[100vw] h-[100vh] overflow-hidden '>{children}</body>
-    </html>
+      <body className='w-[100vw] h-[100vh] overflow-hidden '>
+          {children}
+      </body>
+    </html >
   )
 }

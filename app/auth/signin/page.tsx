@@ -1,20 +1,35 @@
 "use client";
 import { useState } from "react";
+import Cookies from "js-cookie"
 import Image from "next/image";
 import logo from '@/public/logo.svg'
 import Link from "next/link";
+import { user } from "@/lib";
+import { useRouter } from "next/navigation";
 
 function Signin() {
+
+    // set up the next router to navigate between tabs
+    const router = useRouter();
+
     const [userData, setUserData] = useState<{ email: string, password: string }>({
         email: "",
         password: "",
     })
 
     // signin function call the lib folder and send the data to server
-    // TODO: signin funcionality
 
-    const signIn = () => {
+    const signIn = (e: any) => {
+        e.preventDefault();
 
+        user.signin(userData)
+            .then(res => {
+                // setting the cookie for jwt auth & userId
+                Cookies.set(`jwt`, res.data.access_token, { expires: 30, path: '/' });
+                Cookies.set(`userId`, res.data.userId, { expires: 30, path: '/' });
+                router.push('/')
+            })
+            .catch(err => console.log(err))
     };
 
     return (
@@ -25,10 +40,10 @@ function Signin() {
                 <h1 className='text-[30px] font-bold -ml-8 '>Sign-In ^w^</h1>
             </div>
 
-            <form onSubmit={signIn} className="w-full flex gap-5 flex-col">
+            <form onSubmit={(e) => signIn(e)} className="w-full flex gap-5 flex-col">
                 <input
                     value={userData.email}
-                    onInput={(e: any) =>  setUserData({...userData, email: e.target.value.toString()}) }
+                    onInput={(e: any) => setUserData({ ...userData, email: e.target.value.toString() })}
                     type="email"
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Email..."
@@ -37,7 +52,7 @@ function Signin() {
                 <input
                     type="password"
                     value={userData.password}
-                    onInput={(e: any) =>  setUserData({...userData, password: e.target.value.toString()})}
+                    onInput={(e: any) => setUserData({ ...userData, password: e.target.value.toString() })}
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Password..."
                     required />

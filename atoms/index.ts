@@ -1,3 +1,4 @@
 import { sessionAtom } from "./sessionAtom";
+import { searchAtom } from "./searchAtom";
 
-export { sessionAtom }
+export { sessionAtom, searchAtom }

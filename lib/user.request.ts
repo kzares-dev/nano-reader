@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "./";
 
 interface UserType {
     email: string,
@@ -10,7 +10,7 @@ class User {
     async signin(user: UserType) {
 
         // call the server and return the jwt
-        return await axios.post('http://localhost:3001/auth/signin', user)
+        return await axios.post('/auth/signin', user)
     };
 }
 

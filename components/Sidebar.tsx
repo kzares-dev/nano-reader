@@ -4,13 +4,13 @@ import folder from "@/public/folder.png"
 import share from "@/public/share.png"
 import star from "@/public/star.png";
 import Image from "next/image";
-import { Button } from "./shared/Button";
 import Link from "./shared/Link";
+import { Logout } from ".";
 
 const Sidebar = () => {
 
     return (
-        <div className="min-w-[210px] h-screen bg-white border-r border-[20] -mt-[1px] border-t">
+        <div className="min-w-[210px] h-full bg-white border-r border-[20] -mt-[1px] z-20 border-t flex justify-between flex-col">
 
             <div className="flex w-full flex-col gap-5 px-3 pt-4 ">
 
@@ -41,6 +41,9 @@ const Sidebar = () => {
                 </div>
 
             </div>
+
+            <Logout />
+
 
         </div>
     )

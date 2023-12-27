@@ -24,6 +24,7 @@ function Signin() {
 
         user.signin(userData)
             .then(res => {
+                console.log(res)
                 // setting the cookie for jwt auth & userId
                 Cookies.set(`jwt`, res.data.access_token, { expires: 30, path: '/' });
                 Cookies.set(`userId`, res.data.userId, { expires: 30, path: '/' });

@@ -3,19 +3,36 @@
 import Image from "next/image"
 import Link from "./shared/Link"
 import { Button } from "./shared/Button"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import logo from '@/public/logo.svg'
 import layout from '@/public/layout.png'
 import list from '@/public/list.png'
+import { useRecoilState } from "recoil";
+import { searchAtom } from "@/atoms";
 
 
 function Topbar() {
 
+    // Atoms handling the search and layout style 
     const [listLayout, setListLayout] = useState(false);
+    const [search, setSearch] = useRecoilState(searchAtom);
+
+    const searchRef = useRef<any>()
+
+    useEffect(() => {
+        window.addEventListener('keydown', (ev) => {
+            if (ev.key === '/') {
+                setTimeout(() => {
+                    searchRef.current.focus();
+                }, 1 )
+            }
+        });
+       
+    }, []);
 
     return (
-        <div className=" shadow-sm border bg-white">
+        <div className=" shadow-sm border bg-white absolute w-full">
             <div className="px-[20px] py-5 pt-8 flex items-center flex-row gap-5 ">
 
                 <div className="flex items-center justify-center gap-6 cursor-pointer w-[189px] ">
@@ -46,8 +63,15 @@ function Topbar() {
 
                     <div className="flex flex-row gap-5 ">
                         <div className="input-src items-center justify-center border">
-                            <div className="text-[14px] font-bold bg-gray-50 px-2 py-1 text-center rounded-sm border">/</div>
-                            <input type="text" placeholder="search in library" className="bg-gray-100 flex-1" />
+                            <div className="text-[14px] font-bold bg-gray-50 px-2 py-1 text-center rounded-sm border ">/</div>
+                            <input
+                                ref={searchRef}
+                                value={search}
+                                onChange={e => setSearch(e.target.value)}
+                                type="text"
+                                placeholder="search in library"
+                                className="bg-gray-100 flex-1"
+                            />
                         </div>
 
                         <div className="flex px-3 flex-row gap-2 mt-1 ">

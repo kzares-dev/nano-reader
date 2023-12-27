@@ -11,11 +11,12 @@ const Upload = () => {
     const [session, setSession] =  useRecoilState(sessionAtom);
 
     const [fileData, setFileData] = useState<FileType>({
-        title: "title", // TODO: Mock data should be romove later
-        author: "author",
+        title: "", 
+        author: "",
         fileUrl: "http://fileurl.com",
         imageUrl: "http://fileimageurl.com",
         userId: session.id,
+        isFavorite: false,
     })
 
     const uploadFile = (e: any) => {
@@ -36,14 +37,16 @@ const Upload = () => {
 
             <form onSubmit={(e: any) => uploadFile(e)} className="w-full flex gap-5 flex-col">
                 <input
-
+                    value={fileData.title}
+                    onChange={e => setFileData({...fileData, title: e.target.value })}
                     type="text"
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Set a title..."
                     required />
 
                 <input
-
+                    value={fileData.author}
+                    onChange={e => setFileData({...fileData, author: e.target.value })}
                     type="text"
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Author..."

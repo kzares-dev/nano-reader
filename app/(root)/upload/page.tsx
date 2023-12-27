@@ -5,13 +5,15 @@ import { useState } from 'react'
 import { FileType, file } from '@/lib'
 import { useRecoilState } from 'recoil'
 import { sessionAtom } from '@/atoms'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 const Upload = () => {
 
-    const [session, setSession] =  useRecoilState(sessionAtom);
+    const [session, setSession] = useRecoilState(sessionAtom);
 
     const [fileData, setFileData] = useState<FileType>({
-        title: "", 
+        title: "",
         author: "",
         fileUrl: "http://fileurl.com",
         imageUrl: "http://fileimageurl.com",
@@ -19,12 +21,19 @@ const Upload = () => {
         isFavorite: false,
     })
 
+    const router = useRouter()
+
     const uploadFile = (e: any) => {
 
         e.preventDefault()
         file.uploadFile(fileData)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+            .then(() => {
+                toast.success("File uploaded Succesfully");
+                router.push('/')
+            })
+            .catch(() => {
+                toast.error("Failed to upload File")
+            } )
     }
     return <section className='flex flex-row w-full'>
 
@@ -38,7 +47,7 @@ const Upload = () => {
             <form onSubmit={(e: any) => uploadFile(e)} className="w-full flex gap-5 flex-col">
                 <input
                     value={fileData.title}
-                    onChange={e => setFileData({...fileData, title: e.target.value })}
+                    onChange={e => setFileData({ ...fileData, title: e.target.value })}
                     type="text"
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Set a title..."
@@ -46,7 +55,7 @@ const Upload = () => {
 
                 <input
                     value={fileData.author}
-                    onChange={e => setFileData({...fileData, author: e.target.value })}
+                    onChange={e => setFileData({ ...fileData, author: e.target.value })}
                     type="text"
                     className="w-full py-3 pl-4 rounded-md border"
                     placeholder="Author..."

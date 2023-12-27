@@ -1,4 +1,5 @@
 'use client'
+import { ToastContainer } from 'react-toastify';
 import './globals.css'
 //import type { Metadata } from 'next'
 import { ProgressLoader } from 'nextjs-progressloader';
@@ -18,6 +19,7 @@ export default function AppLayout({
       <body className='w-[100vw] h-[100vh] overflow-hidden '>
         <ProgressLoader />
         {children}
+        <ToastContainer  newestOnTop position="bottom-right" />
       </body>
     </html >
   )

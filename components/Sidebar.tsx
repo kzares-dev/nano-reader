@@ -10,7 +10,7 @@ import { Logout } from ".";
 const Sidebar = () => {
 
     return (
-        <div className="min-w-[210px] h-full bg-white border-r border-[20] -mt-[1px] z-20 border-t flex justify-between flex-col">
+        <div className="min-w-[210px] h-full  bg-white border-r border-[20] -mt-[1px] z-20 border-t hidden md:flex justify-between flex-col">
 
             <div className="flex w-full flex-col gap-5 px-3 pt-4 ">
 
@@ -34,11 +34,6 @@ const Sidebar = () => {
                         <span>Favorites</span>
                     </div>
                 </Link>
-
-                <div className="flex items-center gap-3 px-3 py-2 rounded cursor-pointer ">
-                    <Image src={share} width={25} height={25} alt="" />
-                    <span>Share</span>
-                </div>
 
             </div>
 

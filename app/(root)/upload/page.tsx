@@ -35,7 +35,7 @@ const Upload = () => {
                 toast.error("Failed to upload File")
             } )
     }
-    return <section className='flex flex-row w-full'>
+    return <section className='flex flex-col xl:flex-row w-full p-4 md:p-0'>
 
         <div className="px-5 pt-[5vw] rounded-md border rounded-tl-none rounded-bl-none shadow md:min-w-[450px] bg-white h-full flex flex-col items-center gap-10 pb-10">
 

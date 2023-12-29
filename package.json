@@ -11,6 +11,7 @@
   "dependencies": {
     "@edgestore/react": "^0.1.6",
     "@edgestore/server": "^0.1.6",
+    "@pdftron/webviewer": "^10.6.0",
     "axios": "^1.6.2",
     "jose": "^5.2.0",
     "js-cookie": "^3.0.5",

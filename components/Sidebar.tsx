@@ -1,7 +1,6 @@
 
 import book from "@/public/book.png"
 import folder from "@/public/folder.png"
-import share from "@/public/share.png"
 import star from "@/public/star.png";
 import Image from "next/image";
 import Link from "./shared/Link";
@@ -20,7 +19,7 @@ const Sidebar = () => {
                         <span>Library</span>
                     </div>
                 </Link>
-
+        
                 <Link href="/upload">
                     <div className="flex items-center gap-3 px-3 py-2 rounded cursor-pointer">
                         <Image src={book} width={25} height={25} alt="" />

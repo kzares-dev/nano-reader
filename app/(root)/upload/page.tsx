@@ -2,20 +2,23 @@
 import Image from 'next/image'
 import logo from '@/public/logo.svg'
 import { useState } from 'react'
-import { FileType, file } from '@/lib'
+import { FileType, file, useEdgeStore } from '@/lib'
 import { useRecoilState } from 'recoil'
 import { sessionAtom } from '@/atoms'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import { FileUploader } from '@/components'
+import { loader } from "@/components"
 
 const Upload = () => {
 
     const [session, setSession] = useRecoilState(sessionAtom);
+    const [isUploading, setIsUploading] = useState(false);
 
     const [fileData, setFileData] = useState<FileType>({
         title: "",
         author: "",
-        fileUrl: "http://fileurl.com",
+        fileUrl: "",
         imageUrl: "http://fileimageurl.com",
         userId: session.id,
         isFavorite: false,
@@ -24,17 +27,33 @@ const Upload = () => {
     const router = useRouter()
 
     const uploadFile = (e: any) => {
-
         e.preventDefault()
+
+        if (fileData.fileUrl === "") {
+            toast.error("You must upload a file")
+            console.log("toast")
+            return
+        }
+
+        setIsUploading(true)
+
         file.uploadFile(fileData)
             .then(() => {
                 toast.success("File uploaded Succesfully");
                 router.push('/')
             })
             .catch(() => {
-                toast.error("Failed to upload File")
-            } )
+                toast.error("Failed to submit data")
+            })
+            .finally(() => setIsUploading(false))
     }
+
+    const getFileUrl = (url: string) => {
+        console.log(url)
+        setFileData({ ...fileData, fileUrl: url })
+    }
+
+
     return <section className='flex flex-col xl:flex-row w-full p-4 md:p-0'>
 
         <div className="px-5 pt-[5vw] rounded-md border rounded-tl-none rounded-bl-none shadow md:min-w-[450px] bg-white h-full flex flex-col items-center gap-10 pb-10">
@@ -63,10 +82,14 @@ const Upload = () => {
 
 
 
-                <div className="w-full text-right pr-1 pt-5" >
-                    <button type="submit" className="bg-black rounded-md px-5 py-2 text-white ">
-                        Upload
-                    </button>
+                <div className="w-full text-right flex justify-end pr-1 pt-5" >
+                    {isUploading ?
+                        <Image src={loader} alt='' height={20} width={90} />
+                        :
+                        <button type="submit" className="bg-black rounded-md px-5 py-2 text-white ">
+                            Upload
+                        </button>
+                    }
                 </div>
             </form>
 
@@ -74,12 +97,11 @@ const Upload = () => {
 
         <div className="flex items-center justify-center w-full h-full text-gray-100 font-bold">
 
-            <input type="file" className="file:bg-gradient-to-b file:from-purple-500 file:to-purple-600 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-lg file:text-white file:cursor-pointer file:shadow:lg file:shadow-blue-600/50 
-            pr-3
-            bg-gradient-to-br bg-white  text-black/80 rounded-md cursor-pointer border shadow-sm" />
+            <FileUploader getFileUrl={getFileUrl} />
+
         </div>
 
-    </section>
+    </section >
 }
 
 export default Upload

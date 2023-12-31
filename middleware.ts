@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest,) {
 
     try {
         // decode the jwt in the edge, return error if not valid
-        // ! Vulnerability: decoder key must be secret
+        // ! VulneraSbility: decoder key must be secret
         await jwtVerify(authToken.value, new TextEncoder().encode('R2h8sPqJ4T9g3nF1'))
 
         // returning path
